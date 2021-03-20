@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/bookworm/static/js/main.1ad2e8aa.chunk.js",
-    "main.js.map": "/bookworm/static/js/main.1ad2e8aa.chunk.js.map",
+    "main.js": "/bookworm/static/js/main.d5ff75d6.chunk.js",
+    "main.js.map": "/bookworm/static/js/main.d5ff75d6.chunk.js.map",
     "runtime-main.js": "/bookworm/static/js/runtime-main.e04c5e61.js",
     "runtime-main.js.map": "/bookworm/static/js/runtime-main.e04c5e61.js.map",
     "static/js/2.3a22b46c.chunk.js": "/bookworm/static/js/2.3a22b46c.chunk.js",
@@ -14,6 +14,6 @@
   "entrypoints": [
     "static/js/runtime-main.e04c5e61.js",
     "static/js/2.3a22b46c.chunk.js",
-    "static/js/main.1ad2e8aa.chunk.js"
+    "static/js/main.d5ff75d6.chunk.js"
   ]
 }
