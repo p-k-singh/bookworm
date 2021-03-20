@@ -85,6 +85,10 @@ export default function ButtonAppBar() {
           </ListItem>
         
       </List>
+      <div style={{marginTop:70}} key='image'>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzMNsMVM2Fy9kEBzGzUDq1WVh7sypH3qrkzA&usqp=CAU" />
+
+      </div>
     </div>
   );
   return (
