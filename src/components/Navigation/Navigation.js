@@ -60,22 +60,22 @@ export default function ButtonAppBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
     <List>
-        <ListItem button component={Link} to="/google.com" key='myProfile'>
+        <ListItem button component={Link} to="/myProfile" key='myProfile'>
             <ListItemIcon> <PersonIcon /></ListItemIcon>
             <ListItemText primary='My Profile' />
         </ListItem>
-        <ListItem button component={Link} to="/google.com" key='swipe'>
+        <ListItem button component={Link} to="/swipe" key='swipe'>
         <ListItemIcon> <TouchAppIcon /></ListItemIcon>
         <ListItemText primary='Swipe' />
           </ListItem>
-          <ListItem button component={Link} to="/google.com" key='myLibrary'>
+          <ListItem button component={Link} to="/myLibrary" key='myLibrary'>
           <ListItemIcon> <LocalLibraryIcon /></ListItemIcon>
             <ListItemText primary='My Library' />
           </ListItem>
     </List>
       <Divider />
       <List>
-      <ListItem button component={Link} to="/google.com" key='forum'>
+      <ListItem button component={Link} to="/forum" key='forum'>
       <ListItemIcon> <ForumIcon /></ListItemIcon>
             <ListItemText primary='Forum' />
           </ListItem>

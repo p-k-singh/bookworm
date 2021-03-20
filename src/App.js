@@ -1,6 +1,11 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Navigation from './components/Navigation/Navigation'
+import Library from './components/Library/Library'
+import Forum from './components/Forum/Forum'
+import MyProfile from './components/MyProfile/MyProfile'
+import Swipe from './components/Swipe/Swipe'
+
 
 //import BasicInfoIndex from './components/KYC/BasicInfoKyc/BasicInfoIndex'
 import { useEffect, useState } from "react";
@@ -35,7 +40,10 @@ function App(props) {
         <div className={classes.toolbar} />
           <Switch>
             {/* Home page (DashBoard Content) */}
-            {/* <Route exact path="/" component={Home} /> */}
+            <Route exact path="/myLibrary" component={Library} />
+            <Route exact path="/forum" component={Forum} />
+            <Route exact path="/swipe" component={Swipe} />
+            <Route exact path="/myProfile" component={MyProfile} />
 
 
             {/* <Route
