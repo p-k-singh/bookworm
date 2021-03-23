@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,6 +20,8 @@ import { Divider, Grid } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField'
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Button from '@material-ui/core/Button'
+import Select from "react-select";
+import Webcam from "react-webcam";
 
 const messages = [
   {
@@ -73,12 +75,18 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 2, 0),
   },
   modalPaper: {
-    position: 'absolute',
-   // width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    top:'10%',
+    left:'10%',
+    overflow:'scroll',
+    height:'100%',
+    display:'block',
+     position: 'absolute',
+  //  // width: 400,
+     backgroundColor: theme.palette.background.paper,
+     border: '2px solid #000',
+     boxShadow: theme.shadows[5],
+     padding: theme.spacing(2, 4, 3),
+  //   overflow:'scroll',
   },
   paper: {
     paddingBottom: 50,
@@ -119,6 +127,14 @@ export default function BottomAppBar() {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  const [chosenTags,setChosenTags] = useState([]);
+  const webcamRef = React.useRef(null);
+  const [imgSrc, setImgSrc] = React.useState(null);
+
+  const capture = React.useCallback(() => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setImgSrc(imageSrc);
+  }, [webcamRef, setImgSrc]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -127,6 +143,125 @@ export default function BottomAppBar() {
   const handleClose = () => {
     setOpen(false);
   };
+  const selectStyles = {
+    menu: (base) => ({
+      ...base,
+      zIndex: 100,
+    }),
+  };
+
+  const onTagsChange = (event) => {
+    setChosenTags(event)
+  }
+
+  
+
+  //const test = ["Comedy","HI","OP","VGL"]
+  const test = [
+    {
+      label:"Comedy",
+      value:"Comedy"
+    },
+    {
+      label:"Horror",
+      value:"Horror"
+    },
+    {
+      label:"New",
+      value:"New"
+    },
+    {
+      label:"Old",
+      value:"Old"
+    }
+  ]
+  const allTags=[
+    {
+        label:"Action and Adventure",
+        value:"Action and Adventure"
+        },
+    {
+        label:"Classics",
+        value:"Classics"
+        }, 
+    {
+        label:"Comic book or Graphic Novel",
+        value:"Comic book or Graphic Novel"
+        }, 
+    {
+        label:"Detective and Mystery",
+        value:"Detective and Mystery"
+        }, 
+    {
+        label:"Fantasy",
+        value:"Fantasy"
+        },  
+    {
+        label:"Historical Fiction",
+        value:"Historical Fiction"
+        }, 
+    {
+        label:"Horror",
+        value:"Horror"
+        }, 
+    {
+        label:"Literary Fiction",
+        value:"Literary Fiction"
+        }, 
+    {
+        label:"Romance",
+        value:"Romance"
+        }, 
+    {
+        label:"Science Fiction(The Testaments)",
+        value:"Science Fiction(The Testaments)"
+        }, 
+    {
+        label:"Short Stories",
+        value:"Short Stories"
+        }, 
+    {
+        label:"Suspense and Thrillers",
+        value:"Suspense and Thrillers"
+        }, 
+    {
+        label:"Women's Fiction",
+        value:"Women's Fiction"
+        }, 
+    {
+        label:"Biographies and Autobiographies",
+        value:"Biographies and Autobiographies"
+        }, 
+    {
+        label:"Cookbooks",
+        value:"Cookbooks"
+        }, 
+    {
+        label:"Essays",
+        value:"Essays"
+        }, 
+    {
+        label:"History",
+        value:"History"
+        }, 
+    {
+        label:"Memoir",
+        value:"Memoir"
+        }, 
+    {
+        label:"Poetry",
+        value:"Poetry"
+        }, 
+    {
+        label:"Self-Help",
+        value:"Self-Help"
+        }, 
+    {
+        label:"True Crime",
+        value:"True Crime"
+        } 
+    
+    ]
   const body = (
     <div style={modalStyle} className={classes.modalPaper}>
       <h1 id="simple-modal-title">Add book to library</h1>
@@ -137,8 +272,39 @@ export default function BottomAppBar() {
           <Grid item xs={12} sm={6}>
           <TextField id="bookAuthor" label="Author" variant="outlined" size="small" />
           </Grid>
+          <Grid item xs={12}>
+          <Select
+                isMulti
+                styles={selectStyles}
+                name="Features"
+                value={chosenTags}
+                options={allTags}
+                placeholder="Features(Select multiple)"
+                className="basic-multi-select"
+                onChange={(event) => onTagsChange(event)}
+                classNamePrefix="select"
+              />
+          </Grid>
           <Grid item xs={12} sm={6}>
           <TextareaAutosize aria-label="minimum height" style={{width:300}} rowsMin={6} placeholder="Description" />
+          </Grid>
+          
+          {/* <Grid item xs={12}>
+            <label></label>
+          <input type="file"  />
+          </Grid> */}
+          <Grid item xs={12}>
+                  <Webcam
+                audio={false}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+              />
+              <button onClick={capture}>Capture photo</button>
+              {imgSrc && (
+                <img
+                  src={imgSrc}
+                />
+              )}
           </Grid>
       </Grid>
       <Button variant='contained' style={{float:'right'}} color='primary'>
