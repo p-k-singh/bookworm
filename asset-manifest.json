@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/bookworm/static/js/main.c704adb3.chunk.js",
-    "main.js.map": "/bookworm/static/js/main.c704adb3.chunk.js.map",
-    "runtime-main.js": "/bookworm/static/js/runtime-main.4f52b87c.js",
-    "runtime-main.js.map": "/bookworm/static/js/runtime-main.4f52b87c.js.map",
-    "static/js/2.1565bbe3.chunk.js": "/bookworm/static/js/2.1565bbe3.chunk.js",
-    "static/js/2.1565bbe3.chunk.js.map": "/bookworm/static/js/2.1565bbe3.chunk.js.map",
-    "static/js/3.21eea3c9.chunk.js": "/bookworm/static/js/3.21eea3c9.chunk.js",
-    "static/js/3.21eea3c9.chunk.js.map": "/bookworm/static/js/3.21eea3c9.chunk.js.map",
+    "main.js": "/bookworm/static/js/main.b36aafce.chunk.js",
+    "main.js.map": "/bookworm/static/js/main.b36aafce.chunk.js.map",
+    "runtime-main.js": "/bookworm/static/js/runtime-main.edd46863.js",
+    "runtime-main.js.map": "/bookworm/static/js/runtime-main.edd46863.js.map",
+    "static/js/2.3bb45fd1.chunk.js": "/bookworm/static/js/2.3bb45fd1.chunk.js",
+    "static/js/2.3bb45fd1.chunk.js.map": "/bookworm/static/js/2.3bb45fd1.chunk.js.map",
+    "static/js/3.f40217d0.chunk.js": "/bookworm/static/js/3.f40217d0.chunk.js",
+    "static/js/3.f40217d0.chunk.js.map": "/bookworm/static/js/3.f40217d0.chunk.js.map",
     "index.html": "/bookworm/index.html",
-    "static/js/2.1565bbe3.chunk.js.LICENSE.txt": "/bookworm/static/js/2.1565bbe3.chunk.js.LICENSE.txt"
+    "static/js/2.3bb45fd1.chunk.js.LICENSE.txt": "/bookworm/static/js/2.3bb45fd1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.4f52b87c.js",
-    "static/js/2.1565bbe3.chunk.js",
-    "static/js/main.c704adb3.chunk.js"
+    "static/js/runtime-main.edd46863.js",
+    "static/js/2.3bb45fd1.chunk.js",
+    "static/js/main.b36aafce.chunk.js"
   ]
 }
