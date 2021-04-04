@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -22,6 +23,10 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Button from '@material-ui/core/Button'
 import Select from "react-select";
 import Webcam from "react-webcam";
+import CameraAltIcon from '@material-ui/icons/CameraAlt';
+import FlipCameraAndroidIcon from '@material-ui/icons/FlipCameraAndroid';
+import VideocamOffIcon from '@material-ui/icons/VideocamOff';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const messages = [
   {
@@ -130,6 +135,8 @@ export default function BottomAppBar() {
   const [chosenTags,setChosenTags] = useState([]);
   const webcamRef = React.useRef(null);
   const [imgSrc, setImgSrc] = React.useState(null);
+  const [uploadImg,setUploadImg] = useState(null);
+  const [showCamera,setShowCamera] = useState(false);
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -262,6 +269,57 @@ export default function BottomAppBar() {
         } 
     
     ]
+  
+    const [videoConstraints,setVideoContraints] = useState("user");
+    const changeCamera = () => {
+      if(videoConstraints.facingMode==='user'){
+        setVideoContraints({facingMode: { exact: "environment" }});
+      }
+      else{
+        setVideoContraints({facingMode: 'user'})
+      }
+    }
+  const cameraComponents = () => {
+    return(
+      <>
+    <Grid item xs={12}>
+      <Webcam
+    audio={false}
+    ref={webcamRef}
+    screenshotFormat="image/jpeg"
+    width="100%"
+    height="100%"
+    videoConstraints={videoConstraints}
+  />
+ 
+</Grid>
+
+<IconButton onClick={()=>changeCamera()}>
+<FlipCameraAndroidIcon />
+</IconButton>
+  <button onClick={capture}>Capture photo</button>
+  {imgSrc && (
+    <img
+      src={imgSrc}
+    />
+  )}
+  </>
+    );
+  } 
+  const handleSubmit = () => {
+    
+    const body= {
+      book:{
+        name:'Hello Trial',
+        tags:[]
+      }
+        
+      }
+    
+    axios.post('https://6h6nlvoxy8.execute-api.ap-south-1.amazonaws.com/Staging01'+`/user/pksingh`,body)
+    .then(res => alert(res))
+    .catch(err => console.log(err))
+  }
   const body = (
     <div style={modalStyle} className={classes.modalPaper}>
       <h1 id="simple-modal-title">Add book to library</h1>
@@ -289,25 +347,60 @@ export default function BottomAppBar() {
           <TextareaAutosize aria-label="minimum height" style={{width:300}} rowsMin={6} placeholder="Description" />
           </Grid>
           
-          {/* <Grid item xs={12}>
-            <label></label>
-          <input type="file"  />
-          </Grid> */}
           <Grid item xs={12}>
+            
+          {!showCamera && <IconButton onClick={()=>setShowCamera(!showCamera)} color="primary" component="span">
+              < CameraAltIcon /> 
+            </IconButton>}
+          {showCamera && 
+          <IconButton onClick={()=>setShowCamera(!showCamera)} color="primary" component="span">
+          < VideocamOffIcon /> 
+        </IconButton>}
+          
+            
+            OR &nbsp; &nbsp;
+            <input
+        type="file"
+        onChange={(event) => setUploadImg(event.target.files[0])}
+        id="contained-button-file"
+        style={{ display: 'none' }}
+      />
+      <label htmlFor="contained-button-file">
+        <Button variant="contained" color="primary" component="span">
+          Upload
+        </Button>
+      </label>
+      {uploadImg && 
+        <>
+          ( {uploadImg.name}<IconButton onClick={()=>setUploadImg(null)} ><DeleteIcon /></IconButton>) 
+        </>
+      }
+          </Grid>
+          
+          {showCamera && cameraComponents()}
+         {/* {showCamera && <Grid item xs={12}>
                   <Webcam
                 audio={false}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
+                width="100%"
+                height="100%"
+                videoConstraints={videoConstraints}
               />
+             
+          </Grid>}
+          {showCamera &&
+          <IconButton>
+          <FlipCameraAndroidIcon />
+          </IconButton>}
               <button onClick={capture}>Capture photo</button>
               {imgSrc && (
                 <img
                   src={imgSrc}
                 />
-              )}
-          </Grid>
+              )} */}
       </Grid>
-      <Button variant='contained' style={{float:'right'}} color='primary'>
+      <Button onClick={()=>handleSubmit()} variant='contained' style={{float:'right'}} color='primary'>
           Submit
       </Button>
       
