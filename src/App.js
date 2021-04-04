@@ -5,7 +5,9 @@ import Library from './components/Library/Library'
 import Forum from './components/Forum/Forum'
 import MyProfile from './components/MyProfile/MyProfile'
 import Swipe from './components/Swipe/Swipe'
-
+import Auth from './components/Auth/WecomeAuth'
+import fire from "./fire";
+import Spinner from './components/Utils/Spinner'
 
 //import BasicInfoIndex from './components/KYC/BasicInfoKyc/BasicInfoIndex'
 import { useEffect, useState } from "react";
@@ -29,6 +31,38 @@ const useStyles = makeStyles((theme) => ({
 
 function App(props) {
   const classes = useStyles();
+  const [user, setUser] = useState("");
+  const [loading,setLoading] = useState(true);
+
+  const authListener = () => {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser("");
+      }
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    authListener();
+  }, []);
+
+
+  if(loading){
+    return(
+      <Spinner />
+    );
+  }
+
+  if(!user){
+    return (
+      <Auth setUser={setUser} />
+    );
+
+  }
+
 
   return (
     <div className={classes.root}>
